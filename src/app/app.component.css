@@ -1,0 +1,61 @@
+.form-container {
+    max-width: 500px;
+    width: 95%;
+    margin: 50px auto 0;
+}
+
+.form-title {
+    color: rgb(0, 89, 167);
+    font-family: Lato;
+    font-size: 22px;
+}
+
+.form {
+    width: 100%;
+    text-align: center;
+}
+
+.input-full-width {
+    width: 100%;
+}
+
+button:disabled {
+    cursor: not-allowed;
+    background-color: rgba(0, 0, 0, .12) !important;
+    color: rgba(0, 0, 0, .26)!important;
+}
+
+button[mat-raised-button] {
+    background-color: #616161;
+    margin: 20px 0;
+    color: white;
+    text-transform: uppercase;
+}
+
+button[mat-raised-button]:hover {
+    background-color: #9E9E9E;
+    color: #000;
+}
+
+button[mat-raised-button]#add {
+    background-color: #009688;
+}
+
+button[mat-raised-button]#add:hover {
+    background-color: #00796B;
+    color: #ffffff;
+}
+
+button[mat-raised-button]#delete {
+    background-color: #f44336;
+}
+
+button[mat-raised-button]#delete:hover {
+    background-color: #D32F2F;
+    color: #ffffff;
+}
+
+.error-msg {
+    color: #f44336;
+    text-align: left;
+}

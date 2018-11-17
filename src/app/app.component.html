@@ -1,20 +1,79 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+<app-header></app-header>
+<div class="form-container" fxLayout="column">
+    <form class="form"
+          (ngSubmit)="submitForm(shLForm, formDirective)"
+          [formGroup]="shLForm"
+          #formDirective="ngForm">
+        <mat-form-field class="input-full-width">
+            <input matInput
+                   placeholder="Shopping list name"
+                   type="text"
+                   formControlName="shLName">
+        </mat-form-field>
+        <div class="error-msg"
+             *ngIf="shLForm.get('shLName').invalid && shLForm.get('shLName').touched">
+            <span *ngIf="shLForm.get('shLName').errors['required']">
+                Shopping list name is required!
+            </span>
+        </div>
+        <div formArrayName="shLItName"
+             fxLayout="column"
+             fxLayoutAlign="center flex-start">
+            <button mat-raised-button
+                    type="button"
+                    id="add"
+                    (click)="onAddItem()">Add Item
+            </button>
+            <div fxLayout="row"
+                 [ngStyle.xs]="{'width': '95%'}"
+                 style="width: 100%;"
+                 fxLayoutAlign="space-between center"
+                 *ngFor="let item of shItemsData.controls; let i = index">
+                <div fxLayout="column" fxFlex="80%">
+                    <mat-form-field class="input-full-width">
+                        <input matInput placeholder="Item name"
+                               type="text"
+                               id="shLItName"
+                               [formControlName]="i">
+                    </mat-form-field>
+                    <div class="error-msg"
+                         *ngIf="item.invalid && item.touched">
+                        <span *ngIf="item.errors['required']">
+                            Item name is required!
+                        </span>
+                    </div>
+                </div>
+                <div fxFlex="15%">
+                    <button type="button"
+                            id="delete"
+                            mat-raised-button
+                            (click)="onDeleteItem(i)">X
+                    </button>
+                </div>
+            </div>
+        </div>
+        <button mat-raised-button
+                class="input-full-width"
+                type="submit"
+                [disabled]="shLForm.invalid">Submit
+        </button>
+    </form>
+    <div *ngIf="submitted">
+        <div class="form-container"
+             fxLayout="row"
+             fxLayout.xs="column"
+             fxLayoutAlign="space-between">
+            <div fxFlex="50%">
+                <p>Shopping list name: <strong>{{formData.shListName}}</strong></p>
+                <p>Item with the longest name: <strong>{{longestString}}</strong></p>
+                <p>Number of items: <strong>{{formData.shItems.length}}</strong></p>
+            </div>
+            <div fxFlex="40%">
+                <h3>Items Names:</h3>
+                <ul>
+                    <li *ngFor="let item of formData.shItems">{{item}}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
-
